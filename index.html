@@ -181,6 +181,49 @@
         <p id="statusMessage"></p>
     </div>
 
-    
+    <script>
+        const API_KEY = "3d90a6f0f0fc4d6996221147250710";
+        const API_BASE_URL = "http://api.weatherapi.com/v1/current.json";
+
+        function fetchWeather() {
+            const location = $('#locationInput').val().trim();
+            if (location === "") {
+                $('#statusMessage').text("⚠️ Lokasi harus diisi!").removeClass("loading");
+                return;
+            }
+
+            $('#statusMessage').text("⏳ Mengambil data...").addClass("loading");
+
+            const urlapi = `${API_BASE_URL}?key=${API_KEY}&q=${location}&aqi=no`;
+
+            $.ajax({
+                url: urlapi,
+                method: "GET",
+                success: function(data) {
+                    $('#statusMessage').text("✅ Data berhasil dimuat!").removeClass("loading");
+                    $('#condition').text(data.current.condition.text);
+                    $('#temp').text(data.current.temp_c + " °C");
+                    $('#humidity').text(data.current.humidity + " %");
+                    $('#locationName').text(data.location.name + ", " + data.location.country);
+                    $('#country').text(data.location.country);
+                    $('#region').text(data.location.region || '-');
+                    $('#lon').text(data.location.lon);
+                    $('#lat').text(data.location.lat);
+                },
+                error: function() {
+                    $('#statusMessage').text("❌ Gagal memuat data!").removeClass("loading");
+                    $('#locationName').text("Lokasi tidak ditemukan");
+                    $('.data-value').text('...');
+                }
+            });
+        }
+
+        $('#getWeatherBtn').on('click', fetchWeather);
+        $('#locationInput').on('keypress', function(e) {
+            if (e.which == 13) fetchWeather();
+        });
+
+       
+    </script>
 </body>
 </html>
