@@ -157,6 +157,30 @@
     <div class="weather-card">
         <h2>🌤️ Informasi Cuaca Dunia</h2>
 
-      
+        <div class="input-area">
+            <input type="search" id="locationInput" placeholder="Masukkan lokasi (contoh: Tokyo, Jakarta)">
+            <button id="getWeatherBtn">GET</button>
+        </div>
+        
+        <h3 id="locationName">Masukkan lokasi untuk memulai...</h3>
+        
+        <div id="weatherData" class="data-section">
+            <div class="data-item"><span class="data-label">Cuaca</span><span id="condition" class="data-value">...</span></div>
+            <div class="data-item"><span class="data-label">Suhu</span><span id="temp" class="data-value">...</span></div>
+            <div class="data-item"><span class="data-label">Kelembapan</span><span id="humidity" class="data-value">...</span></div>
+        </div>
+
+        <div class="data-section">
+            <h4 style="margin-bottom: 10px; color: #fff; opacity: 0.9;">Detail Lokasi</h4>
+            <div class="data-item"><span class="data-label">Negara</span><span id="country" class="data-value">...</span></div>
+            <div class="data-item"><span class="data-label">Provinsi / Region</span><span id="region" class="data-value">...</span></div>
+            <div class="data-item"><span class="data-label">Longitude</span><span id="lon" class="data-value">...</span></div>
+            <div class="data-item"><span class="data-label">Latitude</span><span id="lat" class="data-value">...</span></div>
+        </div>
+
+        <p id="statusMessage"></p>
+    </div>
+
+    
 </body>
 </html>
