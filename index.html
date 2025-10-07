@@ -1,39 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuaca</title>
+    <title>Informasi Cuaca</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        /* ==== GLOBAL STYLE ==== */
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* ==== CARD STYLE ==== */
+        .weather-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            padding: 35px;
+            width: 90%;
+            max-width: 460px;
+            color: #fff;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            margin-bottom: 25px;
+        }
+
+        .input-area {
+            display: flex;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        #locationInput {
+            flex-grow: 1;
+            padding: 14px 18px;
+            border: none;
+            background: transparent;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #locationInput::placeholder {
+            color: rgba(255,255,255,0.8);
+        }
+
+        #getWeatherBtn {
+            background: linear-gradient(135deg, #42e695, #3bb2b8);
+            border: none;
+            color: white;
+            padding: 14px 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #getWeatherBtn:hover {
+            background: linear-gradient(135deg, #32c47e, #2d9fa3);
+            transform: scale(1.05);
+        }
+
+        h3 {
+            text-align: center;
+            margin: 15px 0 20px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .data-section {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 15px;
+        }
+
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .data-item:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 500;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .data-value {
+            font-weight: 600;
+            color: #ffeb3b;
+        }
+
+        #statusMessage {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 500;
+            font-size: 15px;
+            color: #ffe082;
+        }
+
+        /* ==== ANIMATION & RESPONSIVE ==== */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        #statusMessage.loading {
+            animation: pulse 1.2s infinite;
+        }
+
+        @media (max-width: 500px) {
+            h2 {
+                font-size: 22px;
+            }
+            #locationInput {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
-<body>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-   CUACA : <p id="lokasi"></p><hr>
-   <div id="tampilan"></div>
-
-   <script>
-        const urlapi = "http://api.weatherapi.com/v1/current.json?key=3d90a6f0f0fc4d6996221147250710&q=Jogja&aqi=no";
-
-        $.ajax({
-            url : urlapi,
-            method : "GET",
-            success : function(data){
-                console.log(data);
-                const v = document.getElementById("tampilan");
-                const l = document.getElementById("lokasi");
-                let suhu = data.current.temp_cS;
-                let lokasi = data.location.name;
-                v.innerHTML = suhu;
-                l.innerHTML = lokasi;
-            },
-            fail : function(error){
-                console.log(error);
-            },
-        })
-
-        
-
-
-   </script>
-</body>
-</html>
